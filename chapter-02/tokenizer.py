@@ -1,5 +1,5 @@
 import re
-from simpletokenizer import SimpleTokenizer1
+from simpletokenizer1 import SimpleTokenizer1
 
 def run():
 
@@ -9,6 +9,7 @@ def run():
         # remove non alpha characters?
         # words = [word for word in words if re.search(r'[a-zA-Z]{1,}', word)]
         words = sorted(set(words))
+        words.extend(["<|endoftext|>", "<|unknown|>"])
         # map sorted words to integer id
         dictionary = {word:index for index,word in enumerate(words)}
 
@@ -21,10 +22,13 @@ def run():
 
         text = """"It's the last he painted, you know,"
                    Mrs. Gisburn said with pardonable pride"""
-        values = simtok.encode(text)
-        print(values)
 
+        print(simtok.encode(text))
+
+        values = simtok.encode("Hello how are you?")
+        print(values)
         print(simtok.decode(values))
+
 
 
 

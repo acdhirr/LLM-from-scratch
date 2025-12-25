@@ -15,8 +15,16 @@ class SimpleTokenizer1:
 
     def encode(self, text):
 
-        tokens  = self.text2tokens(text)
+        tokens = self.text2tokens(text)
+
+        tokens = [
+            token if token in self.tokensToValues
+            else "<|unknown|>"
+            for token in tokens
+        ]
+
         values = [self.tokensToValues[token] for token in tokens]
+
         return values
 
     def decode(self, values):
